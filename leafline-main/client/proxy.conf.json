@@ -1,0 +1,11 @@
+{
+  "/serverapi/*": {
+    "target": "http://localhost:8080",
+    "pathRewrite": {
+      "^/serverapi": ""
+    },
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

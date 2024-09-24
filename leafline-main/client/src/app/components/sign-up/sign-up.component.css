@@ -1,0 +1,22 @@
+button.yellow {
+    background-color: #FEFAE0; 
+  }
+  
+
+  .logo{
+    position: absolute;
+    top: 3%;
+    left:3%;
+    width: 20vw;
+  }
+
+  .centered {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background: #FAEDCD;
+    border-radius: 2vw; 
+    padding-top: 1.5%;
+    padding-bottom: 1%;
+  }
+

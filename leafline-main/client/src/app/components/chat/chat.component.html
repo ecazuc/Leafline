@@ -1,0 +1,67 @@
+<html>
+    <head>
+    </head>
+
+    <body>
+
+        <div class="correspondant" >
+                <strong *ngIf="noConversation" class="name">Select a conversation</strong>
+                <!-- <img   *ngIf="discussion.picture" class="picture" [src]="'/assets/images/' + selectedConversation.picture" alt="Profile Picture"> -->
+                <strong *ngIf="!noConversation" class="name">{{selectedConversation.with}}</strong>
+                
+
+            <!-- <div class="new"  *ngIf="selectedConversation.with === 'New Conversation'">
+                <img   *ngIf="selectedConversation.picture" class="picture" [src]="'/assets/images/' + selectedConversation.picture" alt="Profile Picture"> 
+                <form class="example-form">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input type="text"
+                             [(ngModel)]="newCorrespondant"
+                             matInput
+                             [formControl]="myControl"
+                             [matAutocomplete]="auto">
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                  
+            </div> -->
+            
+        </div>
+
+     
+        
+        <div class="message-list" #messageContainer>
+            <div class="liste" *ngIf="selectedConversation" >              
+                <div class="message" *ngFor="let message of selectedConversation.messages" [style.min-width]="calculateMinWidth(message)" [ngClass]="{'you':isFromCurrentUser(message),'other':!isFromCurrentUser(message)}" >  
+                    <div class="message-body" [style.width]="calculateMessageSize(message)" [style.min-width]="calculateMinWidth(message)" [style.padding]="calculatePadding(message)" [ngClass]="{'you':isFromCurrentUser(message),'other':!isFromCurrentUser(message)}">{{ message.body }}</div>
+                    <div class="time " [ngClass]="{'you':isFromCurrentUser(message),'other':!isFromCurrentUser(message)}">  
+                      {{ isSameDay(message.timestamp!, selectedConversation) ? (message.timestamp | date:'hh:mm a') : (message.timestamp | date:'dd/MM/yy') }}
+                    </div>
+                </div>          
+            </div>
+       
+
+  
+              
+        </div>  
+        
+
+       <div class="input-bar">
+            <input class="text-input" type="text" placeholder="Aa" [(ngModel)]="newMessage" (keyup.enter)="send()">
+
+            <button mat-icon-button class="send-button"  matSuffix mat-icon-button aria-label="Send"  (click)="send()">
+                <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.5265 8.17134L1.65147 15.0074C1.53492 15.0883 1.42906 15.0273 1.36862 14.9436C1.3397 14.904 1.25264 14.7582 1.329 14.5628L3.79603 8.23237H8.11348C8.215 8.23237 8.29771 8.11903 8.29771 7.98034C8.29771 7.84125 8.215 7.72791 8.11348 7.72791H3.79603L1.329 1.39745C1.25264 1.20209 1.3397 1.05706 1.36862 1.01664C1.42906 0.933023 1.53492 0.871997 1.65147 0.952837L11.5265 7.78894C11.6043 7.84323 11.6127 7.94071 11.6127 7.98034C11.6127 8.01957 11.6043 8.11705 11.5265 8.17134ZM11.6926 7.33838L1.81749 0.502274C1.57425 0.334651 1.29516 0.397658 1.10543 0.663954C0.916859 0.928268 0.876369 1.30948 1.00391 1.63482L3.47731 7.98034L1.00391 14.3255C0.876369 14.6508 0.916859 15.0324 1.10543 15.2963C1.22459 15.464 1.37932 15.5507 1.53839 15.5507C1.63181 15.5507 1.72696 15.5202 1.81749 15.458L11.6926 8.62191C11.8704 8.49866 11.9812 8.25337 11.9812 7.98034C11.9812 7.70691 11.8704 7.46162 11.6926 7.33838Z" fill="#1EDADA" stroke="black" stroke-width="0.5"/>
+                 </svg>
+            </button>
+
+        </div>
+          
+       
+    </body>
+
+</html>
+

@@ -1,0 +1,297 @@
+/* chat-list.component.css */
+
+/* Set the body and HTML to occupy the full viewport height */
+body, html {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+   
+  }
+
+
+
+/* Style the <ul> element that wraps the conversation list */
+    .list {
+
+        /* list-style-type: none; */
+        padding: 2%;
+        margin:0;
+
+        margin-left: 10px;;
+        margin-right: auto;
+
+        height: inherit;
+        width: 26vw;
+
+        border-right: 1px solid #D4A373; 
+
+    }
+  
+  /* Style each conversation item in the list */
+  .item {
+    margin-bottom: 4%;
+    padding: 2%;
+    cursor: pointer;
+    display: grid;
+    align-items:center;
+    background-color: #FAEDCD;
+    border: 0.2px solid #000000;
+    border-radius: 7px;  
+    height: 50px;
+    width: 24vw;
+    overflow: visible;
+    grid-template-columns:  0.15fr 1fr auto;
+    padding-top: 1.5%;
+    padding-bottom: 3%;
+    
+
+  }
+  
+  /* Highlight the selected conversation item */
+  li.selected {
+    background-color: #E6BC93;
+  }
+
+  .img-profil{
+    width: 3vw;
+    height: auto;
+    margin-bottom: 22%;
+    justify-self: center;
+    margin-right: 10%;
+  
+  }
+
+  .conversation-name{
+    font-size: 20px;
+    margin: 1% 0;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 17vw; 
+    height: 65%;
+    padding: 1%;
+    margin-bottom: 0;
+    display: flex;
+    
+   
+  }
+
+  .conversation-last{
+    font-size: 12px; 
+    margin: 1% 0;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width:17vw; 
+    padding-left: 1%;
+  }
+
+  .info{
+    display: grid;
+   
+  }
+  .ping{
+    align-self: baseline;
+    transform: scale(250%);
+    margin-left: 3%;
+  }
+
+  .delete-button{
+   align-self: center;
+   margin-bottom: 22%;
+   
+  }
+
+
+  
+ 
+  h1{
+    display: grid;
+    grid-template-columns: 1fr auto auto; /* Two columns: one flexible, one auto-sized */
+    align-items: center; /* Vertically center items */
+  }
+
+  .input-field {
+    width: 70%;
+    height: 10%;
+    border-radius: 15px;
+    padding: 5%;
+    border: none;
+    background-color: #FAEDCD;  
+    outline:none  ;
+  }
+ 
+  
+  /* Add a custom outline style on focus */
+  .input-field:focus {
+    outline: 1px solid #D4A373; 
+  }
+
+
+
+  /* plus button */
+  .plus{
+   transform: scale(1.4); 
+  }
+
+  /* title  */
+  .title{
+    font-family: 'Kelly Slab';
+    padding-left: 0%;
+    margin-left: 0%;
+    font-size: 25px;
+  }
+
+
+  .scrollable-container {
+    overflow:auto;
+    width: 26vw; /*Set the width of the scrollable container */
+    height: 85%; /*Set the height of the scrollable container */
+    
+    /* For Firefox */
+    scrollbar-width: auto; /* "thin" or "auto" */
+    scrollbar-color: #D4A373 #FAEDCD; /* Thumb and track colors */
+
+  }
+
+
+   .search-bar{
+    border: #676767 1px solid;
+    height: fit-content;
+    border-radius: 20px;  
+    margin-bottom: 2%;
+    display: grid;
+    background-color: #E6D4C2;
+    grid-template-columns: 0.08fr 1fr auto;
+    min-height: 6vh;   
+    max-height: 6vh;
+  }
+
+
+  .search-input{
+    margin-left: 0.5%;
+    width: 20vw;
+    height: 5vh; 
+    background-color:#E6D4C2 ;
+    border-radius: 20px;
+    border: none;
+    box-shadow: none;
+    outline:none  ;
+   
+
+    align-self: center;
+    margin-left: 3%;
+    max-width: 20vw;
+    min-width: 20vw;
+
+
+  }
+
+  /* Add a custom outline style on focus */
+ .search-bar.active {
+  border: 2px solid #676767; 
+}
+
+.lens{
+  margin-right: 5%;
+  transform: scale(2.2);
+  justify-self: center;
+  align-self: center;
+  padding-left: 20%; 
+}
+
+.clear-button{   
+  justify-self: end;
+  transform: scale(85%);
+  align-self: center;
+  padding: 0;
+}
+
+
+
+
+  /* screen small but bigger than phone in portrait */
+
+  @media screen and (max-width: 668px) {
+    h1{
+      margin-left: 0%;
+      padding-left: 0;
+    }
+
+    .title{
+      font-size: 16px;
+    }
+
+    .plus{
+      margin: 0;
+      transform: scale(1.1);
+    }
+
+  }
+  
+
+    /* when smaller screen portrait mode */
+    @media screen and (max-width: 468px) {
+      .list{
+        border: none;
+        width: 75vw;
+      }
+
+      .item{
+        width: 86vw;
+      }
+
+      .scrollable-container{
+        width: 90vw;
+        padding-right: 3%;
+      }
+
+      .search-bar{
+        width: 87vw;
+        padding-bottom: 0%;
+        
+      }
+
+      .search-bar div{
+         width: 80vw;
+        
+      }
+
+      .search-bar img{
+        margin-right: 5%;
+        
+      }
+    
+    
+      .clear-button{
+        margin-left: 20%;
+        
+      }
+
+
+      .img-profil{
+        transform: scale(320%);
+      }
+
+      h1{
+        width: 79vw;
+      }
+
+      .title{
+        font-size: 30px;
+      }
+
+      .conversation-last{
+        max-width: 70vw;
+      }
+
+      .conversation-name{
+        max-width: 70vw;
+      }
+      
+         
+  
+      
+    
+    }

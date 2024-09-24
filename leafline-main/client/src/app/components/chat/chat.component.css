@@ -1,0 +1,207 @@
+body{
+    background-color: #E3E1BC;
+    height: 89vh;
+    border-radius: 20px;
+    width: 69vw;
+    margin-left: 4%; 
+    margin-top: 0%;
+    padding-bottom: 1%;
+}
+
+
+.message-list {
+
+  /* border: red solid 3px; */
+  margin-left:  1%;
+  margin-right: 0.5%;
+  padding-right: 2%;
+  /* margin-block-start: 1%; */
+
+
+  overflow-x: hidden;
+  overflow-y: auto; /* Enable scrolling for the message list */
+  height: 74vh; 
+    
+  /* For Firefox */
+  scrollbar-width: auto; /* "thin" or "auto" */
+  scrollbar-color: #D4A373 #FAEDCD; /* Thumb and track colors */
+
+ 
+}
+
+.liste{
+  display: grid;
+  gap: 0;
+}
+
+ .message{
+  margin: 10px;
+  display: grid;
+ }
+
+ .message.other{
+  justify-self: start;
+ }
+
+ .message.you{
+  justify-self: end;
+ }
+.message-body {
+  /* min-width: 3.5vw; */
+  word-wrap:break-word;
+  
+  /* padding: 10%; */
+  border-radius: 20px; 
+  font-size:large;
+}
+
+/* messages send by the other */
+.message-body.other{
+  justify-self: start;
+  background-color: #BBC893;
+}
+
+/* messages send by you */
+.message-body.you{
+  justify-self: end;
+  background-color: #FEFAE0;
+}
+
+/* timestamp */
+.time{
+  font-size: xx-small;
+  justify-self: end;
+}
+
+  
+.input-bar{
+  display: grid;
+  grid-template-columns: 1fr auto; /* Two columns: one flexible, one auto-sized */
+  align-items: center; 
+  margin-top: 0.5%;
+  margin-left: 2%;
+
+  
+  width: 67vw;
+}
+
+.send-button{ 
+ justify-self: end;
+}
+
+.send-button svg{
+  transform: scale(1.2);
+}
+
+.text-input{
+  background-color:#FEFAE0 ;
+  border-radius: 20px;
+  margin-right: 1%;
+  height: 5vh;
+  border: none;
+  box-shadow: none;
+  outline:#D4A373 1px  ;
+  padding-left: 2%;
+}
+
+
+/* Add a custom outline style on focus */
+.text-input:focus {
+  outline: 2px solid #D4A373; 
+}
+
+.correspondant{
+  border-bottom: 1px solid #D4A373;
+  height: 5vh;
+  /* display:flex; */
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  display: flex;
+  
+}
+
+.correspondant img{
+  height: 5vh;
+  margin-right: 1%;
+  
+}
+
+.exist{
+  display:flex;
+}
+
+.new{
+  display:flex;
+}
+
+.name{
+
+  align-self:center;
+  font-size: large;
+
+}
+
+/* ipad format in portrait mode */
+@media screen and (max-width: 810px) and (min-width:418px) {
+  .message{
+    min-width: 5vw;
+    padding: 2%;
+  }
+}
+
+
+/* when the screen is smaller portrait mode */
+@media screen and (max-width: 468px) {
+
+  body{
+    width: 92vw;
+    margin-left: 4%; 
+    margin-top: 0%;
+  }
+
+
+  .message-list{
+    width: 85vw;
+    height: 76vh;
+  }
+
+  .message{ 
+    min-width: 17vw;
+    padding: 3%;
+  }
+  
+
+  .input-bar{
+    width: 88vw;
+    margin-left: 3%;
+  }
+
+}
+
+
+/* when the screen is smaller landscape mode */
+@media screen and (max-height: 468px) {
+
+  body{
+    height: 86vh;
+    margin-left: 3%; 
+    margin-top: 0%;
+  }
+
+  .message-list{
+    height: 66vh;
+  }
+
+  .message{ 
+    min-width: 5vw;
+    padding-left: 2%;
+  }
+
+  .input-bar{
+    margin-top: 0.1%
+  }
+
+
+}

@@ -1,0 +1,341 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: contact@mightycode.fr
+    url: https://mightycode.fr/
+  description: This is a prototype of CPOO Project's front/back API.
+  title: CPOO Server API
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/
+security:
+  - CookieAuth: [ ]
+tags:
+  - name: authentication
+    description: Authentication endpoints.
+  - name: administration
+    description: Administration endpoints.
+  - name: message
+    description: Message endpoints.
+  - name: configuration
+    description: Configuration endpoints.
+paths:
+  /user/signup:
+    post:
+      summary: Sign up to the service
+      description: Create a user account with provided credentials.
+      security: [ ]
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+      responses:
+        '200':
+          description: Success
+        '409':
+          description: 'Conflict: a user account with the same login already exists.'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/signin:
+    post:
+      summary: Sign in to the service
+      description: Sign in using provided credentials and create a user session.
+      security: [ ]
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+      responses:
+        '200':
+          description: 'Success: a user session is created and a session cookie is returned.'
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+        '409':
+          description: 'Conflict: user already signed in (the session cookie is valid).'
+        '401':
+          description: 'Unauthorized: invalid login or password.'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/profile:
+    get:
+      summary: Get user profile
+      description: Retrieve the profile information of the signed-in user.
+      tags:
+        - authentication
+      responses:
+        '200':
+          description: 'Success: profile information are returned.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfilDTO'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/signout:
+    post:
+      summary: Sign out from the service
+      description: Sign out and close the user session.
+      tags:
+        - authentication
+      responses:
+        '200':
+          description: 'Success: the user session is closed.'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/{login}:
+    delete:
+      summary: Delete a user account
+      description: Delete the account of the user matching the given login.
+        Only the administrator can use this endpoint.
+      tags:
+        - administration
+      parameters:
+        - description: login of the user account to delete.
+          in: path
+          name: login
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: 'Not found: User account not found.'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /message:
+    post:
+      summary: Send a message
+      description: Send a message on behalf of the signed-in user.
+      tags:
+        - message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMessageDTO'
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+    get:
+      summary: Get next user message
+      description: Get the next message sent to the signed-in user.
+        <br>This is a long polling call, meaning the call blocks until a new message is received,
+        or until a timeout expires.
+      tags:
+        - message
+      responses:
+        '200':
+          description: 'Success: a message is available'
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+        '202':
+          description: 'Accepted: no message available yet'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
+  /message/{id}:
+    delete:
+      summary: Delete a message
+      description: Delete the message matching the given id.
+      tags:
+        - message
+      parameters:
+        - description: id of the message to delete.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: 'Not found: message id not found.'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /messages:
+    get:
+      summary: Get all user messages
+      description: Get all messages sent to or by the signed-in user.
+        <br>Messages are returned from the newest to the oldest.
+      tags:
+        - message
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MessageDTO'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /config:
+    get:
+      summary: Get application configuration
+      description: Get the configuration of the application.
+      security: [ ]
+      tags:
+        - configuration
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigDTO'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
+
+
+components:
+  schemas:
+    NewMessageDTO:
+      description: New message information
+      type: object
+      required:
+        - to
+        - type
+        - body
+      properties:
+        to:
+          type: string
+          example: bob@acme
+        type:
+          type: string
+          format: mime
+          example: text/plain
+        body:
+          type: string
+          example: This is the message
+
+    MessageDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        from:
+          type: string
+          example: alice@acme
+        to:
+          type: string
+          example: bob@acme
+        type:
+          type: string
+          format: mime
+          example: text/plain
+        body:
+          type: string
+          example: This is the message
+        timestamp:
+          type: number
+    UserDTO:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+          format: password
+    ProfilDTO:
+      type: object
+      description: User when research (without passeword)
+      properties:
+        login:
+          type: string
+    ErrorDTO:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+    ConfigDTO:
+      description: Configuration information
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          example: acme
+
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Use a session cookie to authenticate (see /login).
+x-samples-languages:
+  - curl
+  - javascript
+  - node
+  - java
+  - python
+  - php

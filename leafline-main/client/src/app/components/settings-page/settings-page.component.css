@@ -1,0 +1,90 @@
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+
+    width: 30%; 
+    height: 70%; 
+    margin-top: 7%;
+    background: #FAEDCD; 
+    border-radius: 2vw;
+  }
+
+.custom-input {
+  border-radius: 2vw;
+  background: #E0E6B3;
+  font-size: 1.3vw;
+  padding: 2%;
+  border: none;
+}
+
+
+.container{
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  height: 80vh;
+}
+
+  .top_bar{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    height:100%;
+    padding: 1.2%;
+    padding-bottom: 0;
+    height: 50%;
+  }
+
+  .back_button {
+
+    align-self: start;
+    height: 80%;
+    width: 120%;
+  }
+
+  .back_image{
+    transform: scale(200%);
+  }
+
+  h1{
+    font-size: 300%;
+    font-family: inherit;
+    justify-self: center;
+    display: flex;
+    position: absolute;
+    margin-top: 2%;
+  }
+
+  .setting-title{
+    align-self: center;
+    margin: 0 10% 2% 10%;
+  }
+
+  .setting-logo{
+    color: #BBC893;
+    height: auto;
+    width: 5vw;
+    align-self: center;
+  }
+
+
+.user{
+  justify-self: end;
+  display: flex;  
+  margin-right: 0%;
+  padding-right: 20%;
+  align-self: center;   
+  padding-bottom: 10%;
+}
+
+
+
+.name{
+  padding-right: 0%;
+  padding-top: 1%;
+  font-size: xx-large;
+  justify-self: end;
+}

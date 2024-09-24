@@ -1,0 +1,36 @@
+<body>
+    <div>
+        <div class= "centered" style="background: #FEFAE0; height: 100vh;">
+            <div style="position: absolute; top: 5%; right: 5%; font-size: 1.7vw;">
+                Sign In to Leafline
+            </div>
+            <img class="logo" [src]="'assets/images/Leafy_logo.svg'">
+            <div class="centered" style="width: 25%; height: 40%; background: #FAEDCD; border-radius: 20px">
+                <form >
+                    <div style = "margin-bottom: 2%;">
+                        <label for="username" style="font-size: 1.7vw;">Username</label>
+                    </div>
+                    <div>
+                        <input type="text" class="custom-input" id="username" placeholder="Enter your username" #username required>
+                    </div>                    
+                
+                    <div style="margin-bottom: 2%; margin-top: 10%;">
+                        <label for="password" style="font-size: 1.7vw;">Password</label>
+                    </div>
+                    <div>
+                        <input type="password" class="custom-input" id="password" placeholder="Enter your password" #password required>
+                    </div>
+                    <div class="error-message" *ngIf="errorMessage" >
+                        {{ errorMessage }}
+                    </div>
+                 
+                        <button class="button-signIn" (click)="onSignIn(username.value, password.value)" mat-raised-button>Sign in</button>
+                  
+                </form>
+            </div>
+            <p style= "font-size: 1vw; position: absolute; bottom: 20%">New to Leafline ?
+                <a class="go-signUp" [routerLink]="['/signUp']"> Create an account</a>
+            </p>
+        </div>
+    </div>
+</body>
